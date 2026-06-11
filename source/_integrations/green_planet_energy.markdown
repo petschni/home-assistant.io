@@ -46,11 +46,27 @@ The integration provides the following action.
 
 ### Action: Get prices
 
-The `green_planet_energy.get_prices` action returns raw 15-minute electricity price slots for the requested number of hours, starting from the current 15-minute slot. Slots that fall beyond the available data horizon of the API (today and tomorrow) are silently omitted from the result.
+The `green_planet_energy.get_prices` action returns raw 15-minute electricity price slots for the requested number of hours, starting from the current 15-minute slot. Slots that fall beyond the available data horizon of the API (today and tomorrow) are omitted from the result.
 
-- **Data attribute**: `hours`
-  - **Description**: How many hours of price data to return, starting from the current 15-minute slot. Minimum 0.25, maximum 24.
-  - **Optional**: No
+In YAML, refer to this action as `green_planet_energy.get_prices`.
+
+{% example %}
+action: |
+  action: green_planet_energy.get_prices
+  data:
+    hours: 6
+{% endexample %}
+
+#### Options in YAML
+
+{% configuration %}
+hours:
+  description: Number of hours of price data to return, starting from the current 15-minute slot.
+  required: true
+  type: float
+{% endconfiguration %}
+
+Accepted values for `hours` are from `0.25` up to `24`.
 
 #### Response data
 
